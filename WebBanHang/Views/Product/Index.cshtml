@@ -1,0 +1,61 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<IdentityUser> SignInManager
+@model IEnumerable<WebBanHang.Models.Product>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center text-primary">Danh Sách Sản Phẩm</h2>
+
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="text-end mb-3">
+            <a asp-action="Add" class="btn btn-success">➕ Thêm sản phẩm</a>
+        </div>
+    }
+
+    <table class="table table-bordered shadow-sm text-center">
+        <thead class="table-dark">
+            <tr>
+                <th>Hình ảnh</th>
+                <th>Tên</th>
+                <th>Giá</th>
+                <th>Mô tả</th>
+                <th>Danh mục</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="@(!string.IsNullOrEmpty(product.ImageUrl) ? product.ImageUrl : "/uploads/no-image.png")"
+                             width="80" height="80" class="img-thumbnail" alt="Hình sản phẩm">
+                    </td>
+                    <td>@product.Name</td>
+                    <td>@product.Price.ToString("N0") VNĐ</td>
+                    <td>@product.Description</td>
+                    <td>@(product.Category?.Name ?? "Không có danh mục")</td>
+                    <td>
+                        <a asp-action="Display" asp-route-id="@product.Id" class="btn btn-info btn-sm">🔎 Chi tiết</a>
+                        <a asp-controller="Cart" asp-action="AddToCartAndRedirect" asp-route-id="@product.Id" class="btn btn-outline-primary btn-sm me-1">
+                            💲Mua ngay
+                        </a>
+
+                        <form asp-controller="Cart" asp-action="AddToCartSilent" asp-route-id="@product.Id" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-outline-secondary btn-sm">🛒 Thêm vào giỏ</button>
+                        </form>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Update" asp-route-id="@product.Id" class="btn btn-warning btn-sm">🔧 Sửa</a>
+                            <a asp-action="Delete" asp-route-id="@product.Id" class="btn btn-danger btn-sm">❌ Xóa</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

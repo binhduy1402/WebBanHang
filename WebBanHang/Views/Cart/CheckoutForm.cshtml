@@ -1,0 +1,49 @@
+﻿@model OrderInfoViewModel
+@{
+    ViewData["Title"] = "Thông tin đặt hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <h3 class="text-primary text-center mb-4">Thông tin đặt hàng</h3>
+
+    <form asp-action="CheckoutForm" method="post" class="w-50 mx-auto">
+
+        <div class="mb-3">
+            <label asp-for="FullName" class="form-label">Họ tên</label>
+            <input asp-for="FullName" class="form-control" />
+            <span asp-validation-for="FullName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Address" class="form-label">Địa chỉ</label>
+            <input asp-for="Address" class="form-control" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Phone" class="form-label">Số điện thoại</label>
+            <input asp-for="Phone" class="form-control" />
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="PaymentMethod" class="form-label">Hình thức thanh toán</label>
+            <select asp-for="PaymentMethod" class="form-select">
+                <option value="">-- Chọn phương thức --</option>
+                <option>Thanh toán khi nhận hàng</option>
+                <option>Chuyển khoản ngân hàng</option>
+                <option>Ví điện tử</option>
+            </select>
+            <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+        </div>
+
+        <div class="text-end">
+            <button type="submit" class="btn btn-success">✅ Xác nhận đặt hàng</button>
+        </div>
+    </form>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

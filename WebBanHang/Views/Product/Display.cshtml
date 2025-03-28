@@ -1,0 +1,23 @@
+﻿@model WebBanHang.Models.Product
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center text-info">Chi Tiết Sản Phẩm</h2>
+
+    <div class="card shadow-sm p-4 text-center">
+        <h4 class="fw-bold">@Model.Name</h4>
+        <h5 class="text-success">Giá: @Model.Price.ToString("N0") VNĐ</h5>
+        <p class="text-muted">@Model.Description</p>
+
+        <h6 class="fw-bold">Danh mục: @(Model.Category?.Name ?? "Không có danh mục")</h6>
+
+        <div class="my-3">
+            <img src="@(!string.IsNullOrEmpty(Model.ImageUrl) ? Model.ImageUrl : "/uploads/no-image.png")"
+                 width="200" height="200" class="img-thumbnail" alt="Ảnh sản phẩm">
+        </div>
+
+        <a asp-action="Index" class="btn btn-primary px-4">Trở về danh sách</a>
+    </div>
+</div>

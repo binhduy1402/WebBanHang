@@ -1,0 +1,26 @@
+﻿@model WebBanHang.Models.Product
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center text-danger">Xóa Sản Phẩm</h2>
+
+    <div class="card shadow-sm p-4 text-center">
+        <h4 class="fw-bold text-warning">Bạn có chắc chắn muốn xóa sản phẩm này?</h4>
+        <h5 class="text-primary">@Model.Name</h5>
+        <h6 class="text-muted">Danh mục: @(Model.Category?.Name ?? "Không có danh mục")</h6>
+        <h6 class="text-success">Giá: @Model.Price.ToString("N0") VNĐ</h6>
+
+        <div class="my-3">
+            <img src="@(!string.IsNullOrEmpty(Model.ImageUrl) ? Model.ImageUrl : "/uploads/no-image.png")"
+                 width="150" height="150" class="img-thumbnail" alt="Ảnh sản phẩm">
+        </div>
+
+        <form asp-action="Delete" method="post">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger px-4">Xóa</button>
+            <a asp-action="Index" class="btn btn-secondary px-4">Hủy</a>
+        </form>
+    </div>
+</div>

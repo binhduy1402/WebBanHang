@@ -1,0 +1,75 @@
+﻿@model WebBanHang.Models.Product
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center text-primary">Thêm Sản Phẩm Mới</h2>
+
+    <div class="card shadow-sm p-4">
+        <form id="productForm" asp-action="Add" asp-controller="Product" method="post" enctype="multipart/form-data">
+
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label fw-bold">Tên sản phẩm</label>
+                <input asp-for="Name" class="form-control" placeholder="Nhập tên sản phẩm" required />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Price" class="form-label fw-bold">Giá</label>
+                <input asp-for="Price" type="number" class="form-control" placeholder="Nhập giá sản phẩm" required />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+           <div class="mb-3">
+                <label asp-for="Description" class="form-label fw-bold">Mô tả</label>
+                <textarea asp-for="Description" class="form-control" rows="3" placeholder="Mô tả sản phẩm..." required></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="CategoryId" class="form-label fw-bold">Danh mục</label>
+                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories">
+                    <option value="0">-- Chọn danh mục --</option>
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Ảnh đại diện</label>
+                <input type="file" name="imageFile" id="imageFile" class="form-control" accept="image/png, image/jpeg, image/gif" />
+                <span id="fileError" class="text-danger"></span>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-success px-4">Thêm sản phẩm</button>
+                <a asp-action="Index" class="btn btn-secondary px-4">Hủy</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#productForm").submit(function (e) {
+            console.log("Dữ liệu form:", $(this).serialize());
+        });
+
+        $("#imageFile").change(function () {
+            var fileInput = $(this);
+            var filePath = fileInput.val();
+            var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+            if (filePath && !allowedExtensions.exec(filePath)) {
+                $("#fileError").text("Chỉ chấp nhận file ảnh .jpg, .jpeg, .png, .gif");
+                fileInput.val('');
+            } else {
+                $("#fileError").text("");
+            }
+        });
+    });
+</script>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+}

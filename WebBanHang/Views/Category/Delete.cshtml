@@ -1,0 +1,18 @@
+﻿@model WebBanHang.Models.Category
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container mt-5">
+    <h2 class="text-center text-danger">Xóa Danh Mục</h2>
+
+    <div class="card shadow-sm p-4 text-center">
+        <h4>Bạn có chắc chắn muốn xóa danh mục này?</h4>
+        <h5 class="text-primary">@Model.Name</h5>
+
+        <form asp-action="Delete" asp-controller="Category" method="post">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger px-4">Xóa</button>
+            <a asp-action="Index" class="btn btn-secondary px-4">Hủy</a>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Trang Chủ";
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success text-center">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<div class="container text-center mt-5">
+    <div class="jumbotron bg-primary text-white p-5 rounded shadow-lg">
+        <h1 class="display-3 fw-bold">Chào mừng đến với WebBanHang!</h1>
+        <p class="lead">Khám phá những sản phẩm mới nhất với giá tốt nhất.</p>
+        <a class="btn btn-light btn-lg fw-bold" href="@Url.Action("Index", "Product")">Xem sản phẩm</a>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <img src="https://hoanghamobile.com/tin-tuc/wp-content/uploads/2024/08/che-anh.jpg" class="card-img-top" alt="Sản phẩm mới">
+                <div class="card-body">
+                    <h5 class="card-title">Sản phẩm mới</h5>
+                    <p class="card-text">Khám phá các sản phẩm mới nhất tại cửa hàng.</p>
+                    <a href="@Url.Action("Index", "Product")" class="btn btn-primary">Xem ngay</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <img src="https://tft.edu.vn/public/upload/2024/09/meme-che-02.webp" class="card-img-top" alt="Danh mục sản phẩm">
+                <div class="card-body">
+                    <h5 class="card-title">Danh mục sản phẩm</h5>
+                    <p class="card-text">Dễ dàng tìm thấy sản phẩm theo danh mục yêu thích.</p>
+                    <a href="@Url.Action("Index", "Category")" class="btn btn-primary">Xem danh mục</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <img src="https://xwatch.vn/upload_images/images/2023/05/22/anh-meme-la-gi.jpg" class="card-img-top" alt="Khuyến mãi">
+                <div class="card-body">
+                    <h5 class="card-title">Ưu đãi & Khuyến mãi</h5>
+                    <p class="card-text">Nhận ngay những ưu đãi đặc biệt chỉ có tại đây!</p>
+                    <a href="#" class="btn btn-primary">Khám phá</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

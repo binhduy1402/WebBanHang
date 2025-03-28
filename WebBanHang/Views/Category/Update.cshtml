@@ -1,0 +1,24 @@
+﻿@model WebBanHang.Models.Category
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container mt-5">
+    <h2 class="text-center text-warning">Cập Nhật Danh Mục</h2>
+
+    <div class="card shadow-sm p-4">
+        <form asp-action="Update" asp-controller="Category" method="post">
+            <input type="hidden" asp-for="Id" />
+
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label fw-bold">Tên danh mục</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-warning px-4">Cập nhật</button>
+                <a asp-action="Index" class="btn btn-secondary px-4">Hủy</a>
+            </div>
+        </form>
+    </div>
+</div>
